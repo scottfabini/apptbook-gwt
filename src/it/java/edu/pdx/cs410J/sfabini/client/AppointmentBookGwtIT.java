@@ -26,8 +26,8 @@ public class AppointmentBookGwtIT extends GWTTestCase {
     AppointmentBookGwt ui = new AppointmentBookGwt(alerter);
     ui.textBox.setText("4");
     ui.descriptionTextBox.setText("4");
-    ui.beginDateTextBox.setText("01/01/1970 12:00 am");
-    ui.endDateTextBox.setText("01/01/2000 12:00 am");
+    ui.beginDateTextBox.setText("01/01/1970 12:00 AM");
+    ui.endDateTextBox.setText("01/01/2000 12:00 AM");
     click(ui.button);
 
     Timer verify = new Timer() {
@@ -59,6 +59,33 @@ public class AppointmentBookGwtIT extends GWTTestCase {
         String message = alerter.getMessage();
         assertNotNull(message);
         assertTrue(message, message.contains("To create an appointment, enter a description, begin Date, and end Date and click submit"));
+        finishTest();
+      }
+    };
+
+    // Wait for the RPC call to return
+    verify.schedule(500);
+
+    delayTestFinish(1000);
+  }
+
+  @Test
+  public void testInputFullAppointmentAddsOneAppointment() {
+    final CapturingAlerter alerter = new CapturingAlerter();
+
+    AppointmentBookGwt ui = new AppointmentBookGwt(alerter);
+    ui.textBox.setText("My Owner");
+    ui.descriptionTextBox.setText("Test Description 1");
+    ui.beginDateTextBox.setText("01/01/1970 12:00 AM");
+    ui.endDateTextBox.setText("01/01/2000 12:00 AM");
+    click(ui.button);
+
+    Timer verify = new Timer() {
+      @Override
+      public void run() {
+        String message = alerter.getMessage();
+        assertNotNull(message);
+        assertTrue(message, message.contains("My Owner"));
         finishTest();
       }
     };

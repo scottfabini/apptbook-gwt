@@ -9,10 +9,15 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("appointments")
 public interface AppointmentBookService extends RemoteService {
 
-  /**
-   * Returns the current date and time on the server
-   * @param numberOfAppointments
-   */
+
   public AppointmentBook createAppointmentBook(int numberOfAppointments);
+
+  /**
+   * Create a new appointmentBook, or append to add of current appointmentBook if one already exists
+   * @param owner AppointmentBook owner
+   * @param appointment The appointment
+   * @return the appointmentBook
+     */
+  public AppointmentBook createAppointmentBook(String owner, Appointment appointment);
 
 }
