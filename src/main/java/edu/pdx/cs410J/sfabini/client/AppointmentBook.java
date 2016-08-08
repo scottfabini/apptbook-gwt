@@ -11,7 +11,7 @@ import java.util.List;
 public class AppointmentBook extends AbstractAppointmentBook<Appointment>
 {
     private String owner = "My Owner";
-    private Collection<Appointment> appts = new ArrayList<>();
+    private List<Appointment> appts = new ArrayList<>();
 
     public AppointmentBook() {
         this.owner = "My Owner";
@@ -38,6 +38,6 @@ public class AppointmentBook extends AbstractAppointmentBook<Appointment>
     public void addAppointment( Appointment appt )
     {
         this.appts.add(appt);
-        //Collections.sort(appts);
+        Collections.sort(appts);
     }
 }
