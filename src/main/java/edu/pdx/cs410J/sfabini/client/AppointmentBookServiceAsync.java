@@ -19,4 +19,6 @@ public interface  AppointmentBookServiceAsync {
    */
   void createAppointmentBook(String owner, Appointment appointment,
                              AsyncCallback<AppointmentBook> async);
+
+  void getAppointmentBook(String owner, AsyncCallback<AppointmentBook> async);
 }

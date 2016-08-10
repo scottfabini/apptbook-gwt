@@ -36,6 +36,14 @@ public class AppointmentBookServiceImpl extends RemoteServiceServlet implements 
         return book;
     }
 
+    public AppointmentBook getAppointmentBook(String owner) {
+        if (book == null) {
+            book = new AppointmentBook();
+            book.setOwnerName(owner);
+        }
+        return book;
+    }
+
   @Override
   protected void doUnexpectedFailure(Throwable unhandled) {
     unhandled.printStackTrace(System.err);

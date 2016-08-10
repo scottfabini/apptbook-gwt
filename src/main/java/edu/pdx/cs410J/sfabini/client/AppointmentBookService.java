@@ -20,4 +20,5 @@ public interface AppointmentBookService extends RemoteService {
      */
   public AppointmentBook createAppointmentBook(String owner, Appointment appointment);
 
+  public AppointmentBook getAppointmentBook(String owner);
 }

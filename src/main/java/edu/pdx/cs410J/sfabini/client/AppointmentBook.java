@@ -1,12 +1,10 @@
 package edu.pdx.cs410J.sfabini.client;
 
+import com.google.gwt.i18n.client.DateTimeFormat;
 import edu.pdx.cs410J.AbstractAppointment;
 import edu.pdx.cs410J.AbstractAppointmentBook;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class AppointmentBook extends AbstractAppointmentBook<Appointment>
 {
@@ -29,7 +27,7 @@ public class AppointmentBook extends AbstractAppointmentBook<Appointment>
     }
 
     @Override
-    public Collection<Appointment> getAppointments()
+    public List<Appointment> getAppointments()
     {
         return this.appts;
     }
@@ -39,5 +37,27 @@ public class AppointmentBook extends AbstractAppointmentBook<Appointment>
     {
         this.appts.add(appt);
         Collections.sort(appts);
+    }
+
+    /** Note: this must be called only from the client.  Converts an appointment book returned
+     * from the server to only contain dates within the specified range.
+     * @return
+     */
+    public List<Appointment> getAppointmentsInRange(String beginTimeString, String endTimeString) {
+        Date beginTime;
+        Date endTime;
+
+        DateTimeFormat df = DateTimeFormat.getFormat("MM/dd/yyyy hh:mm a");
+        beginTime = df.parse(beginTimeString.toUpperCase());
+        endTime = df.parse(endTimeString.toUpperCase());
+        List<Appointment> appointmentList = getAppointments();
+        List<Appointment> appointmentListWithRange = new ArrayList<>();
+        for (Appointment appointment : appointmentList) {
+            if ((appointment.getBeginTime().after(beginTime) || appointment.getBeginTime().equals(beginTime))
+                    && (appointment.getEndTime().before(endTime) || appointment.getEndTime().equals(endTime))) {
+                appointmentListWithRange.add(appointment);
+            }
+        }
+        return appointmentListWithRange;
     }
 }
