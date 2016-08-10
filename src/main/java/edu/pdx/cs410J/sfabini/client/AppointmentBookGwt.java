@@ -51,8 +51,11 @@ public class AppointmentBookGwt implements EntryPoint {
     this.textBox.getElement().setPropertyString("placeholder", "My Owner");
     this.textBox.setReadOnly(true);
     this.descriptionTextBox = new TextBox();
+    this.descriptionTextBox.getElement().setPropertyString("placeholder", "Description");
     this.beginDateTextBox = new TextBox();
+    this.beginDateTextBox.getElement().setPropertyString("placeholder", "01/01/1970 12:00 AM");
     this.endDateTextBox = new TextBox();
+    this.endDateTextBox.getElement().setPropertyString("placeholder", "01/01/2000 12:00 AM");
     this.textArea = new TextArea();
     this.textArea.setVisibleLines(8);
     this.textArea.setCharacterWidth(50);
@@ -235,7 +238,10 @@ public class AppointmentBookGwt implements EntryPoint {
     panel.setSpacing(4);
     panel.add(new Label("Owner:   "), DockPanel.WEST);
     panel.add(textBox, DockPanel.CENTER);
-    panel.add(button, DockPanel.EAST);
+
+    DockPanel submitPanel = new DockPanel();
+    submitPanel.setSpacing(4);
+    submitPanel.add(button, DockPanel.WEST);
 
     DockPanel descriptionPanel = new DockPanel();
     descriptionPanel.setSpacing(4);
@@ -268,6 +274,7 @@ public class AppointmentBookGwt implements EntryPoint {
     appPanel.add(endDatePanel, DockPanel.EAST);
 
     rootPanel.add(appPanel);
+    rootPanel.add(submitPanel);
     rootPanel.add(textAreaPanel);
     rootPanel.add(helpPanel);
 

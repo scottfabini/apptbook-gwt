@@ -39,9 +39,11 @@ public class AppointmentBook extends AbstractAppointmentBook<Appointment>
         Collections.sort(appts);
     }
 
-    /** Note: this must be called only from the client.  Converts an appointment book returned
-     * from the server to only contain dates within the specified range.
-     * @return
+    /** Converts an appointment book returned from the server to only contain dates within the specified range.
+     * Note: Because it uses GWT's DateTimeFormat, this must be called only from the client.
+     * @param beginTimeString The beginning of the date range
+     * @param endTimeString The end of the date range
+     * @return The ordered list of appointments in the date range
      */
     public List<Appointment> getAppointmentsInRange(String beginTimeString, String endTimeString) {
         Date beginTime;
